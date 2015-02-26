@@ -17,62 +17,9 @@
         margin-top: 2em;
       }
     </style>
-    <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
-    <script>
-      $.urlParam = function(name){
-        var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
-        if (!results) { return undefined; }
-        return results[1] || undefined;
-      }
-
-      $(document).ready(function() {
-        $("#url").keypress(function(e) {
-          if(e.which == 13) {
-            loadUrls();
-          }       
-        });
-
-        loadUrls = function() {
-          var url = $("#url").val();
-          var urls = buildUrls(url.split(/[\[\]]/));
-          var $results = $("#results");
-          $results.empty();
-          for (var url of urls) {
-            var $figure = $("<figure>");
-            $figure.append($("<img>").prop("src", url));
-            $figure.append($("<figcaption>").text(url));
-            var $href = $("<a>").prop("href", url).prop("target", "_blank");
-            $href.append($figure);
-            $results.append($href);
-          }
-        };
-        
-        buildUrls = function(split) {
-          var urls = [];
-          if (split.length == 0) return [""];
-          var cur = split.shift();
-          if (/^(\d+)-(\d+)$/.test(cur)) {
-            var rangeSplit = cur.split(/-/);
-            for (var i = rangeSplit[0]; i <= rangeSplit[1]; i++) {
-              for (var url of buildUrls(split.slice())) {
-                urls.push(i + url);
-              }
-            }            
-          } else {
-            for (var url of buildUrls(split.slice())) {
-              urls.push(cur + url);
-            }
-          }
-          return urls;
-        };
-
-        var u = $.urlParam("u");
-        if (u != undefined) {
-          $("#url").val(unescape(u));
-          loadUrls();
-        }
-      });
-    </script>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/uri.js/src/URI.min.js"></script>
+    <script src="main.js"></script>
   </head>
   <body>
     <h1>Image Range Checker</h1>
