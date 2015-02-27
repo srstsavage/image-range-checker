@@ -7,6 +7,7 @@
       }
       #url {
         width: 100%;
+        margin-bottom: 10px;
       }
       img {
         border-style: solid;
@@ -15,6 +16,10 @@
       }
       figure {
         margin-top: 2em;
+      }
+      .error {
+        color: red;
+        font-weight: bold;
       }
     </style>
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
@@ -25,6 +30,7 @@
     <h1>Image Range Checker</h1>
     <p>Enter url with ranges below and press enter (e.g. http://server[1-2]:808[0-2]/image[1-10].png)</p>
     <input id="url" type="text" />
+    <div>Errors: <span id="errCount" /></div>
     <div id="results"></div>
   </body>
 </html>

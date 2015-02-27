@@ -1,7 +1,11 @@
 $(document).ready(function() {
+  var errorCount = 0;
+
   $("#url").keypress(function(e) {
     if(e.which == 13) {
       updateUrlParam();
+      errorCount = 0;
+      updateErrorCount();      
       loadUrls();
     }       
   });
@@ -20,7 +24,7 @@ $(document).ready(function() {
     $results.empty();
     for (var url of urls) {
       var $figure = $("<figure>");
-      $figure.append($("<img>").prop("src", url));
+      $figure.append($("<img>").error(incrementErrorCount).prop("src", url));
       $figure.append($("<figcaption>").text(url));
       var $href = $("<a>").prop("href", url).prop("target", "_blank");
       $href.append($figure);
@@ -47,9 +51,26 @@ $(document).ready(function() {
     return urls;
   };
 
+  incrementErrorCount = function() {
+    errorCount++;
+    updateErrorCount();
+  };
+
+  updateErrorCount = function() {
+    $errCount = $("#errCount");
+    $errCount.text(errorCount);    
+    if (errorCount > 0) {
+      $errCount.addClass("error");
+    } else {
+      $errCount.removeClass("error");
+    }
+  };
+
   var u = URI(window.location.href).query(true).u;
   if (u != undefined) {
     $("#url").val(decodeURIComponent(u));
     loadUrls();
   }
+
+  updateErrorCount();
 });
