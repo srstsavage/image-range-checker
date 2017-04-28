@@ -43,6 +43,12 @@ $(document).ready(function() {
           urls.push(i + url);
         }
       }            
+    } else if (/^\w+(,\w+)+$/.test(cur)) {
+      for (var itemSplit of cur.split(/,/)) {
+        for (var url of buildUrls(split.slice())) {
+          urls.push(itemSplit + url);
+        }
+      }
     } else {
       for (var url of buildUrls(split.slice())) {
         urls.push(cur + url);
