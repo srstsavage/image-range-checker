@@ -25,7 +25,7 @@ $(document).ready(function() {
     for (var url of urls) {
       var $figure = $("<figure>");
       $figure.append($("<img>").error(incrementErrorCount).prop("src", url));
-      $figure.append($("<figcaption>").text(url));
+      $figure.append($("<figcaption>").text(url.split('/')[2]));
       var $href = $("<a>").prop("href", url).prop("target", "_blank");
       $href.append($figure);
       $results.append($href);

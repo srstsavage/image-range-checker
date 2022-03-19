@@ -15,7 +15,11 @@
         border-width: 1px;
       }
       figure {
-        margin-top: 2em;
+        margin: 0.5em;
+        float: left;
+      }
+      figcaption {
+        text-align: center;
       }
       .error {
         color: red;
@@ -30,6 +34,9 @@
     <h1>Image Range Checker</h1>
     <p>Enter url with ranges or lists below and press enter (e.g. http://[server_1,anotherserver]:808[0-2]/image[1-10].png)</p>
     <input id="url" type="text" />
+    <p>Note: CORS-RFC1918 blocks requests to private addresses from public sites. Users with recent versions of Chrome may
+       need to disable this behavior in chrome://flags (Block insecure private network requests) or add permissive CORS headers
+       to private services to use this tool.</p>
     <div>Errors: <span id="errCount" /></div>
     <div id="results"></div>
   </body>
